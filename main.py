@@ -1,21 +1,19 @@
 def main():
-    with open("books/frankenstein.txt") as f:
+    book_path = "books/frankenstein.txt"
+    with open(book_path) as f:
         text = f.read()
         chars = get_chars_dict(text)
-        word_count = text.split()
-        file_name = get_file_name()
+        word_count = len(text.split())
+        file_name = get_file_name(book_path)
     print_report(chars, word_count, file_name)
 
 
-def word_count(text):
-    return len(text.split())
+def get_file_name(book_path: str):
+    with open(book_path) as f:
+        return f.name
 
 
-def get_file_name():
-    return "books/frankenstein.txt"
-
-
-def get_chars_dict(text):
+def get_chars_dict(text: str):
     chars = {}
     for c in text:
         lower_text = c.lower()
@@ -27,11 +25,10 @@ def sort_dict(chars: dict):
     return sorted(chars.items(), key=lambda x: x[1], reverse=True)
 
 
-def print_report(chars, word_count, file_name):
+def print_report(chars, word_count, book_path):
     sorted_chars = sort_dict(chars)
-    file_name = get_file_name()
-    print(f"----- Report for {file_name} -----")
-    print(f"Total words: {len(word_count)} found in the document")
+    print(f"----- Report for {book_path} -----")
+    print(f"Total words: {word_count} found in the document")
     for c, count in sorted_chars:
         if c.isalpha():
             print(f"The '{c}' character was found {count} times")
