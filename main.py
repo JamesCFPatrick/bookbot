@@ -25,7 +25,7 @@ def sort_dict(chars: dict):
     return sorted(chars.items(), key=lambda x: x[1], reverse=True)
 
 
-def print_report(chars, word_count, book_path):
+def print_report(chars: dict, word_count: int, book_path: str):
     sorted_chars = sort_dict(chars)
     print(f"----- Report for {book_path} -----")
     print(f"Total words: {word_count} found in the document")
